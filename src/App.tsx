@@ -10,9 +10,6 @@ interface PersonAge {
   dob: { age: number }
 }
 
-
-
-
 function App() {
   const [ageArray, setAgeArray] = useState<number[][]|null>(null)
   const [oldest10, setOldest10] = useState(null)
@@ -30,11 +27,11 @@ function App() {
       localStorage.setItem('counter', JSON.stringify(count))
     });
     
-      const value = localStorage.getItem('counter');
-      if (value) {
-        JSON.parse(value)
-        setReloadCount(+value)
-      }
+    const value = localStorage.getItem('counter');
+    if (value) {
+      JSON.parse(value)
+      setReloadCount(+value)
+    }
    
   }, [])
 
@@ -46,7 +43,9 @@ function App() {
       const { results } = await data.json()
       const sort = results.sort((a: PersonAge, b: PersonAge) => { return (b.dob.age) - (a.dob.age) })
       setOldest10(sort.slice(0, 9));
-  
+
+
+      // IIFE
       (function () {
         let ageArray: number[][] = [[], [], [], [], [], []]
         results.map((person: PersonAge) => {
@@ -81,9 +80,6 @@ function App() {
       }
     }
   }
-   
-
-  
 
   return (
     <div className="App">
